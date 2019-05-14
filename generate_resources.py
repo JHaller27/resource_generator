@@ -7,18 +7,21 @@ import sys
 def get_category_lists() -> list:
 	return [
 		["raw", "manufactured"],
-		["conflict", "contested"],
+		["conflict", "contested", None, None],
 		["up-cycle", "down-cycle", "re-cycle"]
 	]
 
 
 def get_resource_list() -> list:
-	return ["lumber", "steel", "stone", "grain", "textile", "iron", "clay", "gold", "gems", "copper", "silver", "drink", "livestock", "magic", "paper", "labor", "oil", "food crops"]
+	return ["lumber", "steel", "stone", "grain", "textile", "iron", "clay", "gold", "gems", "copper", "silver", "drink", "livestock", "magic", "paper"]
 
 
 def get_description() -> tuple:
 	l = [random.choice(get_resource_list())]
-	l.extend([random.choice(l) for l in get_category_lists()])
+	for c in get_category_lists():
+		x = random.choice(c)
+		if x is not None:
+			l.append(x)
 
 	return tuple(l)
 
